@@ -54,8 +54,8 @@ configure(project(":lucene:analysis:nori")) {
       dependsOn deleteDictionaryData
       dependsOn sourceSets.main.runtimeClasspath
 
-      def dictionaryName = "mecab-ko-dic-2.0.3-20170922"
-      def dictionarySource = "https://bitbucket.org/eunjeon/mecab-ko-dic/downloads/${dictionaryName}.tar.gz"
+      def dictionaryName = "update-mecab-ko-dic"
+      def dictionarySource = "file:///opt/${dictionaryName}.tar.gz"
       def dictionaryFile = file("${buildDir}/generate/${dictionaryName}.tar.gz")
       def unpackedDir = file("${buildDir}/generate/${dictionaryName}")
 
