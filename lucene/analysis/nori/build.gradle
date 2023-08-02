@@ -16,8 +16,10 @@
  */
 
 apply plugin: 'java-library'
+apply plugin: 'maven-publish' // maven 사용
 
 description = 'Korean Morphological Analyzer'
+group = 'org.apache.lucene'
 
 dependencies {
   moduleApi project(':lucene:core')
@@ -26,3 +28,26 @@ dependencies {
   moduleTestImplementation project(':lucene:test-framework')
 }
 
+publishing {
+  publications {
+    maven(MavenPublication) {
+
+      // groupId, artifactId, version을 따로 지정하지 않으면 처음 생성할 때 지정한 기본설정으로 생성한다. (생략가능)
+      groupId = 'org.apache.lucene'
+      artifactId = 'nori'
+      version = '9.6.0'
+
+      artifact('./build/libs/lucene-analysis-nori-9.6.0-SNAPSHOT.jar') {
+      }
+    }
+  }
+  publishing.publications.remove(publishing.publications.maven)
+}
+
+publishMavenPublicationToMavenLocal.dependsOn "jar"
+
+signing {
+  setRequired {
+    false
+  }
+}
